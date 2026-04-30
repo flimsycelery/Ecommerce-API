@@ -12,7 +12,10 @@ def create_app():
     from app.models import user,product,order
 
     from app.routes.auth import auth_bp
+    from app.routes.products import products_bp
+
     app.register_blueprint(auth_bp,url_prefix="/auth")
+    app.register_blueprint(products_bp,url_prefix="/products")
 
     @app.errorhandler(404)
     def not_found(e):
