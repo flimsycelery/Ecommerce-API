@@ -65,6 +65,10 @@ def create_product():
     except ValidationError as e:
         return jsonify({"error": e.messages}), 422
 
+    existing = Product.query.filter_by(name=data["name"]).first()
+    if existing:
+        return jsonify({"error": "Product with this name already exists"}), 409
+
     product = Product(
         name=data["name"],
         description=data["description"],
